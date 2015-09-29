@@ -90,6 +90,19 @@ public class TemperatureSeriesAnalysisTest {
     }
 
     @Test
+    public void testFindAnotherTempClosestToZero() {
+        double[] temperatureSeries = {1.0, -5.0, -1.0, 5.0, -20.5, 13.5, 2.0,
+                0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0, -17.0, 29.0, -88.0,
+                -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7};
+        TemperatureSeriesAnalysis seriesAnalysis = new
+                TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = 0.0;
+        double actualResult = seriesAnalysis.findTempClosestToZero();
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
     public void testFindTempClosestToValue() {
         double[] temperatureSeries = {-1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0,
                 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0, -17.0, 29.0, -88.0,
