@@ -3,6 +3,8 @@ package ua.yandex.shad.tempseries;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.util.InputMismatchException;
+
 public class TemperatureSeriesAnalysisTest {
 
     @Test
@@ -47,9 +49,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testMax() {
         double[] temperatureSeries = {
-                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0,
-                -10.0, 15.0, 16.0, -17.0, 29.0, -88.0, -19.0, 13.5, 14.1,
-                -11.0, -15.0, 29.0, -23.4, -2.7
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
         };
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
         double expResult = 29.0;
@@ -61,12 +62,11 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempClosestToZero() {
         double[] temperatureSeries = {
-                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.1, 0.5, 11.3, 10.0,
-                -10.0, 15.0, 16.0, -17.0, 29.0, -88.0, -19.0, 13.5, 14.1,
-                -11.0, -15.0, 29.0, -23.4, -2.7
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
         };
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
-        double expResult = 0.1;
+        double expResult = 0.0;
         double actualResult = seriesAnalysis.findTempClosestToZero();
 
         assertEquals(expResult, actualResult, 0.00001);
@@ -75,9 +75,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempClosestToValue() {
         double[] temperatureSeries = {
-                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0,
-                -10.0, 15.0, 16.0, -17.0, 29.0, -88.0, -19.0, 13.5, 14.1,
-                -11.0, -15.0, 29.0, -23.4, -2.7
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
         };
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
         double expResult = 16.0;
@@ -89,11 +88,9 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempLessThan() {
         double[] temperatureSeries = {
-                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0,
-                -10.0, 15.0, 16.0, -17.0, 29.0, -88.0, -19.0, 13.5, 14.1,
-                -11.0, -15.0, 29.0, -23.4, -2.7
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
         };
-
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
         double[] expResult = {
                 1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0,
@@ -109,9 +106,8 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testFindTempGreaterThan() {
         double[] temperatureSeries = {
-                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0,
-                -10.0, 15.0, 16.0, -17.0, 29.0, -88.0, -19.0, 13.5, 14.1,
-                -11.0, -15.0, 29.0, -23.4, -2.7
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
         };
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
         double[] expResult = {15.0, 16.0, 29.0, 29.0};
@@ -120,5 +116,59 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(expResult.length, actualResult.length);
         for (int i = 0; i < expResult.length; ++i)
             assertEquals(expResult[i], actualResult[i], 0.00001);
+    }
+
+    @Test
+    public void testTempSummaryStatisticsEquals() {
+        double[] temperatureSeries = {
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
+        };
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TempSummaryStatistics expResult = new TempSummaryStatistics(
+                -2.028,
+                22.558838,
+                -88.0,
+                29.0
+        );
+        TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
+
+        assertEquals(expResult.avgTemp, actualResult.avgTemp, 0.00001);
+        assertEquals(expResult.devTemp, actualResult.devTemp, 0.00001);
+        assertEquals(expResult.minTemp, actualResult.minTemp, 0.00001);
+        assertEquals(expResult.maxTemp, actualResult.maxTemp, 0.00001);
+    }
+
+    @Test
+    public void testAddTemps() {
+        double[] temperatureSeries = {
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
+        };
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double[] addTemps = {
+                -2.5, 0.2, 3.4, 11.6, 12.8, -172.4, 199.0, 235.10, -88.2, 33.4, -11.3, -44.6,
+                35.1, 68.4, -36.2, -111.2, 33.4
+        };
+
+        int expectedNewSize = temperatureSeries.length + addTemps.length;
+        int newSize = seriesAnalysis.addTemps(addTemps);
+
+        assertEquals(expectedNewSize, newSize);
+    }
+
+    @Test(expected = InputMismatchException.class)
+    public void testAddTempsInputMismatch() {
+        double[] temperatureSeries = {
+                1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0,
+                -17.0, 29.0, -88.0, -19.0, 13.5, 14.1, -11.0, -15.0, 29.0, -23.4, -2.7
+        };
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double[] addTemps = {
+                -2.5, 0.2, 3.4, 11.6, 12.8, -172.4, 199.0, 235.10, -88.2, 33.4, -11.3, -44.6,
+                35.1, 68.4, -36.2, -111.2, 33.4, -278
+        };
+
+        seriesAnalysis.addTemps(addTemps);
     }
 }
