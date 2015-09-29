@@ -5,11 +5,10 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
 
+    private static final int DEFAULT_CAPACITY = 10;
     private double[] temperatureSeries;
     private int capacity = DEFAULT_CAPACITY;
     private int size;
-
-    static private final int DEFAULT_CAPACITY = 10;
 
     public TemperatureSeriesAnalysis() {
         size = 0;
@@ -70,29 +69,25 @@ public class TemperatureSeriesAnalysis {
 
     public double findTempClosestToZero() throws IllegalArgumentException {
         assertNotEmpty();
-        double best = temperatureSeries[0];
-        for (int i = 1; i < size; ++i) {
-            if (Math.abs(best) > Math.abs(temperatureSeries[i]) ||
-                    (Math.abs(best) == Math.abs(temperatureSeries[i]) && best < 0)) {
-                best = temperatureSeries[i];
-            }
-        }
-        return best;
+        return findTempClosestToValue(0);
     }
 
-    public double findTempClosestToValue(double tempValue) throws IllegalArgumentException {
+    public double findTempClosestToValue(double tempValue) throws
+            IllegalArgumentException {
         assertNotEmpty();
         double best = temperatureSeries[0];
         for (int i = 1; i < size; ++i) {
-            if (Math.abs(best - tempValue) > Math.abs(temperatureSeries[i] - tempValue) ||
-                    (Math.abs(best - tempValue) == Math.abs(temperatureSeries[i] - tempValue) && best < 0)) {
+            if (Math.abs(best - tempValue) > Math.abs(temperatureSeries[i] -
+                    tempValue) || (Math.abs(best - tempValue) == Math.abs
+                    (temperatureSeries[i] - tempValue) && best < 0)) {
                 best = temperatureSeries[i];
             }
         }
         return best;
     }
 
-    public double[] findTempsLessThen(double tempValue) throws IllegalArgumentException {
+    public double[] findTempsLessThen(double tempValue) throws
+            IllegalArgumentException {
         assertNotEmpty();
         int count = 0;
         for (int i = 0; i < size; ++i) {
@@ -110,7 +105,8 @@ public class TemperatureSeriesAnalysis {
         return result;
     }
 
-    public double[] findTempsGreaterThen(double tempValue) throws IllegalArgumentException {
+    public double[] findTempsGreaterThen(double tempValue) throws
+            IllegalArgumentException {
         assertNotEmpty();
         int count = 0;
         for (int i = 0; i < size; ++i) {
@@ -128,7 +124,8 @@ public class TemperatureSeriesAnalysis {
         return result;
     }
 
-    public TempSummaryStatistics summaryStatistics() throws IllegalArgumentException {
+    public TempSummaryStatistics summaryStatistics() throws
+            IllegalArgumentException {
         assertNotEmpty();
         return new TempSummaryStatistics(average(), deviation(), min(), max());
     }
