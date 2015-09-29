@@ -110,9 +110,10 @@ public class TemperatureSeriesAnalysis {
                         result[count++] = temperatureSeries[i];
                     }
                 }
-                ++count;
             }
-            if (j == 0) result = new double[count];
+            if (j == 0) {
+                result = new double[count];
+            }
         }
         return result;
     }
