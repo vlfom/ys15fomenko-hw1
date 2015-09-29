@@ -9,6 +9,22 @@ import static org.junit.Assert.assertEquals;
 public class TemperatureSeriesAnalysisTest {
 
     @Test
+    public void testDefaultConstructor() {
+        TemperatureSeriesAnalysis seriesAnalysis = new
+                TemperatureSeriesAnalysis();
+
+        assertEquals(seriesAnalysis.getSize(), 0);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testIllegalArgument() {
+        TemperatureSeriesAnalysis seriesAnalysis = new
+                TemperatureSeriesAnalysis();
+
+        seriesAnalysis.average();
+    }
+
+    @Test
     public void testAverage() {
         double[] temperatureSeries = {1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0,
                 0.0, 0.5, 11.3, 10.0, -10.0, 15.0, 16.0, -17.0, 29.0, -88.0,

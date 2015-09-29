@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
 
     private static final int DEFAULT_CAPACITY = 10;
+    private static final double BOTTOM_BORDER = -273;
     private double[] temperatureSeries;
     private int capacity = DEFAULT_CAPACITY;
     private int size;
@@ -21,6 +22,10 @@ public class TemperatureSeriesAnalysis {
         }
         size = temperatureSeries.length;
         this.temperatureSeries = Arrays.copyOf(temperatureSeries, capacity);
+    }
+
+    public int getSize() {
+        return size;
     }
 
     private void assertNotEmpty() throws IllegalArgumentException {
@@ -78,10 +83,10 @@ public class TemperatureSeriesAnalysis {
         double best = temperatureSeries[0];
         for (int i = 1; i < size; ++i) {
             if (Math.abs(best - tempValue) > Math.abs(temperatureSeries[i] -
-                    tempValue) || (Math.abs(best - tempValue) == Math.abs
-                    (temperatureSeries[i] - tempValue) && best < 0)) {
+                    tempValue) || (Math.abs(Math.abs(best - tempValue) - Math
+                    .abs(temperatureSeries[i] - tempValue)) < 0.00001 && best
+                    < 0))
                 best = temperatureSeries[i];
-            }
         }
         return best;
     }
@@ -132,7 +137,7 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) throws InputMismatchException {
         for (double temp : temps) {
-            if (temp < -273) {
+            if (temp < BOTTOM_BORDER) {
                 throw new InputMismatchException();
             }
         }
