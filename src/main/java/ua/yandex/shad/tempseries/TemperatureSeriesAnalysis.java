@@ -115,12 +115,12 @@ public class TemperatureSeriesAnalysis {
 
     public double[] findTempsLessThen(double tempValue) throws
             IllegalArgumentException {
-        return findTemps(tempValue, 1);
+        return findTemps(tempValue, -1);
     }
 
     public double[] findTempsGreaterThen(double tempValue) throws
             IllegalArgumentException {
-        return findTemps(tempValue, -1);
+        return findTemps(tempValue, 1);
     }
 
     public TempSummaryStatistics summaryStatistics() throws
