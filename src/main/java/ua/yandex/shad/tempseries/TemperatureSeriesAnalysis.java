@@ -85,9 +85,8 @@ public class TemperatureSeriesAnalysis {
         for (int i = 1; i < size; ++i) {
             if (Math.abs(best - tempValue) > Math.abs(temperatureSeries[i]
                     - tempValue) || Math.abs(Math.abs(best - tempValue) - Math
-                    .abs(temperatureSeries[i] - tempValue)) < COMPARE_BORDER &&
-                    best
-                    < 0) {
+                    .abs(temperatureSeries[i] - tempValue)) < COMPARE_BORDER
+                    && best < 0) {
                 best = temperatureSeries[i];
             }
         }
@@ -102,7 +101,7 @@ public class TemperatureSeriesAnalysis {
         for (int j = 0; j < 2; ++j) {
             count = 0;
             for (int i = 0; i < size; ++i) {
-                if (Double.valueOf(temperatureSeries[i]).compareTo(tempValue)
+                if (Double.compare(temperatureSeries[i], (tempValue))
                         == compareToValue) {
                     if (j == 0) {
                         ++count;
