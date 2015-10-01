@@ -86,7 +86,7 @@ public class TemperatureSeriesAnalysis {
             if (Math.abs(best - tempValue) > Math.abs(temperatureSeries[i]
                     - tempValue) || Math.abs(Math.abs(best - tempValue) - Math
                     .abs(temperatureSeries[i] - tempValue)) < COMPARE_BORDER
-                    && best < 0) {
+                    && best < tempValue) {
                 best = temperatureSeries[i];
             }
         }
@@ -117,12 +117,12 @@ public class TemperatureSeriesAnalysis {
         return result;
     }
 
-    public double[] findTempsLessThen(double tempValue) throws
+    public double[] findTempsLessThan(double tempValue) throws
             IllegalArgumentException {
         return findTemps(tempValue, -1);
     }
 
-    public double[] findTempsGreaterThen(double tempValue) throws
+    public double[] findTempsGreaterThan(double tempValue) throws
             IllegalArgumentException {
         return findTemps(tempValue, 1);
     }

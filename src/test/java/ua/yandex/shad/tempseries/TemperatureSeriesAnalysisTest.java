@@ -125,7 +125,7 @@ public class TemperatureSeriesAnalysisTest {
         double[] expResult = {1.0, -5.0, 1.0, 5.0, -20.5, 13.5, 2.0, 0.0,
                 0.5, 11.3, 10.0, -10.0, -17.0, -88.0, -19.0, 13.5, 14.1,
                 -11.0, -15.0, -23.4, -2.7};
-        double[] actualResult = seriesAnalysis.findTempsLessThen(14.3);
+        double[] actualResult = seriesAnalysis.findTempsLessThan(14.3);
 
         assertEquals(expResult.length, actualResult.length);
         for (int i = 0; i < expResult.length; ++i) {
@@ -141,7 +141,7 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new
                 TemperatureSeriesAnalysis(temperatureSeries);
         double[] expResult = {15.0, 16.0, 29.0, 29.0};
-        double[] actualResult = seriesAnalysis.findTempsGreaterThen(14.3);
+        double[] actualResult = seriesAnalysis.findTempsGreaterThan(14.3);
 
         assertEquals(expResult.length, actualResult.length);
         for (int i = 0; i < expResult.length; ++i) {
